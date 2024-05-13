@@ -17,13 +17,96 @@ renderer.shadowMap.enabled = true;
 renderer.setSize(WIDTH, HEIGHT);
 const startButton = document.querySelector('.startButton')
 const gameScreenDiv = document.querySelector('.gameScreen')
-gameScreenDiv.appendChild( renderer.domElement);
+gameScreenDiv.appendChild(renderer.domElement);
+const difficultyButtons = document.querySelectorAll('.difficultySelection button');
+const characterButtons = document.querySelectorAll('.characterSelection button');
+const trackButtons = document.querySelectorAll('.trackSelection button');
+
+difficultyButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        spawnRate(this.classList[0]);
+    });
+});
+
+let difficultySelection = 0;
+function spawnRate(difficulty){
+    // console.log(difficulty);
+    if(difficulty==="speed1") difficultySelection = 30;
+    else if(difficulty==="speed2") difficultySelection = 20;
+    else if(difficulty==="speed3") difficultySelection = 15;
+}
+
+// characterButtons.addEventListener('click', function(){
+//     characterApperance(this.classList[0]);
+// })
+
+characterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        characterApperance(this.classList[0]);
+    });
+});
+let texture;
+
+function characterApperance(avatar){
+    
+    if (avatar === "style1")  riderObject.textureProfile = "https://t4.ftcdn.net/jpg/02/14/37/27/360_F_214372762_E33f93ocNklJ69MroxEambr3IKhUYnxd.jpg";
+    else if (avatar === "style2") riderObject.textureProfile = "https://static.vecteezy.com/system/resources/previews/030/679/047/non_2x/red-texture-high-quality-free-photo.jpg";
+    else if (avatar === "style3") riderObject.textureProfile = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/abcd5984-4ffb-45c5-a3a5-4a93386b71ad/d3d6vv5-fdcb4f13-751a-4aad-b01a-d317332d24d6.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2FiY2Q1OTg0LTRmZmItNDVjNS1hM2E1LTRhOTMzODZiNzFhZFwvZDNkNnZ2NS1mZGNiNGYxMy03NTFhLTRhYWQtYjAxYS1kMzE3MzMyZDI0ZDYuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.e8qH8fv8scNh_HwHHh5xv-5YJMhTXSpgMe4T6Bzq4-U";
+
+    if(riderObject.textureProfile){
+        texture = textureLoader.load(riderObject.textureProfile);
+    }else {
+        texture = null;
+    }
+
+    riderObject.extrudeMaterial.map = texture;
+    riderObject.extrudeMaterial.needsUpdate = true;
+    //console.log(avatarApperance);
+    // if(avatar === "jerrySteez")
+}
+
+trackButtons.forEach(button => {
+    button.addEventListener('click', function(){
+        trackSelection(this.classList[0]);
+    })
+})
+let audio;
+function trackSelection(track){
+    if(audio){
+        audio.pause();
+        audio.currentTime = 0;
+    }
+    if (track === "track1"){
+        audio = new Audio("audio/The-Black-Eyed-Peas-Boom-Boom-Pow-Instrumental-Prod.-By-will.i.am-DJ-Poet-Jean-Baptiste.mp3")
+        startTimer(10000);
+    }
+    else if (track === "track2"){
+        audio = new Audio("audio/Sean-Paul-Temperature-Instrumental-Prod.-By-Snowcone.mp3")
+        startTimer(210000);
+    }
+    else if (track === "track3"){
+        audio = new Audio("audio/The-Black-Eyed-Peas-Ring-A-Ling-Instrumental-Prod.-By-Keith-Harris.mp3")
+        startTimer(260000);
+    }
+
+    if (audio){
+        audio.play();
+    }
+}
+
 
 startButton.addEventListener('click', () => {
+    if(difficultySelection && texture && audio)
     gameScreenDiv.style.display = 'block';
     animate();
 })
 
+let wGame = false;
+function startTimer(gameDuration){
+    setTimeout(()=>{
+        wonGame();
+    }, gameDuration)
+}
 //const controls = new OrbitControls( camera, renderer.domElement );
 const loader = new GLTFLoader();
 
@@ -67,14 +150,8 @@ class GameEntity{
         this.updateSidePos()
         
         if (this.zAcceleration) this.velocity.z += 0.0001;
-        this.extrudeMesh.position.x += this.velocity.x
-        this.extrudeMesh.position.z += this.velocity.z
-        //this tracks to see if the rider is still in contact with the platform
-        // if(this.rightSide >= platformObject.leftSide && this.leftSide <= platformObject.rightSide) {
-        //     // console.log(platformObject.leftSide)
-        //     console.log("collision")
-        // }
-
+        this.extrudeMesh.position.x += this.velocity.x;
+        this.extrudeMesh.position.z += this.velocity.z;
         //game initiation
         this.gameInitiation(platformObject);
     }
@@ -135,7 +212,7 @@ const riderObject = new Rider({
     posX: 0,
     posY: 0,
     posZ: 9,
-    textureProfile: "https://t4.ftcdn.net/jpg/02/14/37/27/360_F_214372762_E33f93ocNklJ69MroxEambr3IKhUYnxd.jpg",
+    textureProfile: null,
     velocity: {
         x: 0,
         y: -0.02,
@@ -218,9 +295,6 @@ function riderMotion(type){
         },
         p: {
             pressed: false
-        },
-        r: {
-            pressed: false
         }
     }
 window. addEventListener('keydown', (event) => {
@@ -241,12 +315,6 @@ window. addEventListener('keydown', (event) => {
         keys.p.pressed = true;
         console.log("keyP was pressed");
         break
-
-        case('KeyR'): 
-        keys.r.pressed = true;
-        if(animationID === null){
-            animate();
-        }
 
     }
 })
@@ -287,21 +355,19 @@ function animate() {
     obstacles.forEach(obstacleObject => {
         obstacleObject.updatePos(platformObject)
         if (riderObject.rightSide >= obstacleObject.leftSide && riderObject.leftSide <= obstacleObject.rightSide && riderObject.back >= obstacleObject.front && riderObject.front <= obstacleObject.back){
+            lostGame();
             window.cancelAnimationFrame(animationID)
         }
-        if (keys.p.pressed){
-            window.cancelAnimationFrame(animationID)
-        }
-        if(keys.r.pressed){
-            window.requestAnimationFrame(animate);
+        if(wGame === true){
+            window.cancelAnimationFrame(animationID);
         }
     })
 
-    //platformRender;
+
 
 	renderer.render(scene, camera );
     // this part of the logic essentially states the following: every 75 iterations of the obstacle spawn variable, add another obstacle to the scene!!!
-    if(obstacleSpawn % 30 === 0){
+    if(obstacleSpawn % difficultySelection === 0){
         const obstacleObject = new Obstacle({
             width: 1, 
             height: 1, 
@@ -309,7 +375,7 @@ function animate() {
             posX: Math.floor(Math.random()*(platformObject.rightSide - platformObject.leftSide) + platformObject.leftSide),
             posY: 0,
             posZ: -9,
-            textureProfile: "https://static.vecteezy.com/system/resources/previews/030/679/047/non_2x/red-texture-high-quality-free-photo.jpg",
+            textureProfile: "https://images.pexels.com/photos/2519175/pexels-photo-2519175.jpeg?cs=srgb&dl=pexels-mihir-koral-s-838411-2519175.jpg&fm=jpg",
             velocity: {
                 x: 0,
                 y: 0,
@@ -326,5 +392,15 @@ function animate() {
     obstacleSpawn++;
 }
 
-
+function lostGame(){
+    alert("OH SHUCKS...YOU LOST...Refresh to Retry")
+    audio.pause();
+    audio.currentTime = 0;
+}
+function wonGame(){
+    alert("WOHOOOO...YOU WON...Refresh to GO AGAIN")
+    wGame = true;
+    audio.pause();
+    audio.currentTime = 0;
+}
 

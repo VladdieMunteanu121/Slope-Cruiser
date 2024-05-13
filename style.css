@@ -67,7 +67,7 @@ div.difficultySelection{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    border-radius: 10px;
 }
 div.difficultySelection > button{
     margin: 8% 0% 8% 0%;
@@ -82,6 +82,7 @@ div.characterSelection{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 10px;
 }
 div.characterSelection > button{
     margin: 8% 0% 8% 0%;
@@ -89,9 +90,34 @@ div.characterSelection > button{
     font-weight: bold;
     font-size: 18px;
 }
-button.noviceDiff{
+button.speed1{
     background-color: #c3f7c8;
 }
+button.speed2{
+    background-color: #ffe342;
+}
+button.speed3{
+    background-color: #fc9432;
+}
+button.style1{
+    background: linear-gradient(#fff3ab, #ffdee2, #a5e8ab);
+}
+button.style2{
+    background: linear-gradient(#ffc3c3, #eb1f20);
+}
+button.style3{
+    background: linear-gradient(#edc0ff, #7364ff);
+}
+button.track1{
+    background: linear-gradient(#5b616a, #fbfcfc, #149322);
+}
+button.track2{
+    background: linear-gradient(#67c753, #fbe243, #eb2e19);
+}
+button.track3{
+    background: linear-gradient(#605a58, #fa9332, #fe736b);
+}
+
 div.trackSelection{
     width: 25vh;
     height: 50vh;
@@ -99,6 +125,7 @@ div.trackSelection{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 10px;
 }
 div.trackSelection > button{
     margin: 8% 0% 8% 0%;
@@ -111,9 +138,14 @@ div.beginGame{
     display: flex;
     justify-content: center;
     height: 6vh;
+    
 }
 .startButton{
     width: 25%;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 20px;
+    background-image: url('https://www.icegif.com/wp-content/uploads/2022/06/icegif-597.gif');
 }
 
 .gameScreen {
