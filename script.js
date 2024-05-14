@@ -78,7 +78,7 @@ function trackSelection(track){
     }
     if (track === "track1"){
         audio = new Audio("audio/The-Black-Eyed-Peas-Boom-Boom-Pow-Instrumental-Prod.-By-will.i.am-DJ-Poet-Jean-Baptiste.mp3")
-        startTimer(10000);
+        startTimer(240000);
     }
     else if (track === "track2"){
         audio = new Audio("audio/Sean-Paul-Temperature-Instrumental-Prod.-By-Snowcone.mp3")
