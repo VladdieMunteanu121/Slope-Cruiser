@@ -1,0 +1,159 @@
+body{
+    margin: 0;
+    background-color: #6db1ff;
+    z-index: 1;
+}
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-family: fantasy;
+}
+nav {
+    padding: 5px 
+}
+#instructions{
+    background-color: aquamarine;
+}
+
+.dropDownContainer{
+    position: relative;
+    display: inline-block;
+}
+
+.dropDownContent{
+    display: none;
+    position: absolute;
+    left:50%;
+    transform: translateX(-50%);
+    background-color: whitesmoke;
+    min-width: 450px;
+    text-align: justify
+}
+
+.dropDownContent > div {
+    border: 1px solid black;
+    line-height: 2px;
+}
+
+div.gameObjectives{
+    margin: 5px;
+    padding: 5px;
+}
+
+div.gameControls{
+    margin: 5px;
+    padding: 5px;
+}
+
+.dropDownContainer:hover .dropDownContent{
+    display: block;
+}
+div.mainMenu{
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    margin: 2% auto;
+    
+    
+}
+div.difficultySelection{
+    width: 25vh;
+    height: 50vh;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+div.difficultySelection > button{
+    margin: 8% 0% 8% 0%;
+    height: 15%;
+    font-weight: bold;
+    font-size: 18px;
+}
+div.characterSelection{
+    width: 25vh;
+    height: 50vh;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+div.characterSelection > button{
+    margin: 8% 0% 8% 0%;
+    height: 15%;
+    font-weight: bold;
+    font-size: 18px;
+}
+button.speed1{
+    background-color: #c3f7c8;
+}
+button.speed2{
+    background-color: #ffe342;
+}
+button.speed3{
+    background-color: #fc9432;
+}
+button.style1{
+    background: linear-gradient(#fff3ab, #ffdee2, #a5e8ab);
+}
+button.style2{
+    background: linear-gradient(#ffc3c3, #eb1f20);
+}
+button.style3{
+    background: linear-gradient(#edc0ff, #7364ff);
+}
+button.track1{
+    background: linear-gradient(#5b616a, #fbfcfc, #149322);
+}
+button.track2{
+    background: linear-gradient(#67c753, #fbe243, #eb2e19);
+}
+button.track3{
+    background: linear-gradient(#605a58, #fa9332, #fe736b);
+}
+
+div.trackSelection{
+    width: 25vh;
+    height: 50vh;
+    background-color:  whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+div.trackSelection > button{
+    margin: 8% 0% 8% 0%;
+    height: 15%;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+div.beginGame{
+    display: flex;
+    justify-content: center;
+    height: 6vh;
+    
+}
+.startButton{
+    width: 25%;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 20px;
+    background-image: url('https://www.icegif.com/wp-content/uploads/2022/06/icegif-597.gif');
+}
+
+.gameScreen {
+    display: none;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    /* z-index: 0; */
+}
